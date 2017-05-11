@@ -1,13 +1,14 @@
 package com.huihui.senior;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
 
-    protected String Title;
+    protected String mTitle;
 
 
     protected void start(Class<?> cls, String title) {
@@ -21,13 +22,15 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         Intent intent = getIntent();
 
-        if (intent!=null){
+        if (intent != null) {
 
-            String title = intent.getStringExtra("title");
+            mTitle = intent.getStringExtra("title");
 
-            setTitle(title);
+            setTitle(mTitle);
         }
     }
 

@@ -18,8 +18,9 @@
         </activity>
         <activity android:name=".event.EventActivity" />
         <activity android:name=".BaseActivity" />
-        <activity android:name=".ui.UIDrawActivity" />
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".funcation.draw.UIDrawActivity" />
+        <activity android:name=".TestActivity" />
+        <activity android:name=".funcation.paint.ui.PaintDemoActivity"></activity>
     </application>
 
 </manifest>
