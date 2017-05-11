@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".event.EventActivity" />
         <activity android:name=".BaseActivity" />
-        <activity android:name=".ui.UIDrawActivity"></activity>
+        <activity android:name=".ui.UIDrawActivity" />
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>
