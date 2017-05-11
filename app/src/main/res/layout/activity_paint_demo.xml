@@ -7,7 +7,12 @@
     tools:context="com.huihui.senior.funcation.paint.ui.PaintDemoActivity">
 
     <com.huihui.senior.funcation.paint.widget.MyDashView
+        android:visibility="gone"
         android:id="@+id/myDashView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.huihui.senior.funcation.paint.widget.MyView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
