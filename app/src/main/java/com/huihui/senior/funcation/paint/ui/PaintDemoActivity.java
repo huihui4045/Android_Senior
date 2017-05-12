@@ -1,23 +1,27 @@
 package com.huihui.senior.funcation.paint.ui;
 
-import android.os.Bundle;
-
-import com.huihui.senior.BaseActivity;
-import com.huihui.senior.R;
+import com.huihui.senior.base.DemoActivity;
+import com.huihui.senior.bean.ItemBean;
 import com.huihui.senior.funcation.paint.widget.MyDashView;
+import com.huihui.senior.funcation.paint.widget.MyView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /****
- * 画笔
+ * 画笔的用法
  */
-public class PaintDemoActivity extends BaseActivity {
+public class PaintDemoActivity extends DemoActivity {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_paint_demo);
+    public List<ItemBean> getDatas() {
 
-        ((MyDashView) findViewById(R.id.myDashView)).startAnim();
+        List<ItemBean> list = new ArrayList<>();
 
+        list.add(new ItemBean("间隔线", new MyDashView(getApplicationContext())));
+        list.add(new ItemBean("Paint基本用法", new MyView(getApplicationContext())));
 
+        return list;
     }
 }

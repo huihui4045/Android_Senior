@@ -3,13 +3,14 @@
     package="com.huihui.senior">
 
     <application
+        android:name=".base.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".base.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,10 +18,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".event.EventActivity" />
-        <activity android:name=".BaseActivity" />
+        <activity android:name=".base.BaseActivity" />
         <activity android:name=".funcation.draw.UIDrawActivity" />
         <activity android:name=".TestActivity" />
-        <activity android:name=".funcation.paint.ui.PaintDemoActivity"></activity>
+        <activity android:name=".funcation.paint.ui.PaintDemoActivity" />
+        <activity android:name=".base.ShowActivity" />
+        <activity android:name=".base.DemoActivity"></activity>
     </application>
 
 </manifest>

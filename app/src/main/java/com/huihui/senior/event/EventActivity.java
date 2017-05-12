@@ -2,7 +2,7 @@ package com.huihui.senior.event;
 
 import android.os.Bundle;
 
-import com.huihui.senior.BaseActivity;
+import com.huihui.senior.base.BaseActivity;
 import com.huihui.senior.R;
 
 /***

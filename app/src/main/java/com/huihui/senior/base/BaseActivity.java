@@ -1,4 +1,4 @@
-package com.huihui.senior;
+package com.huihui.senior.base;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -17,6 +17,7 @@ public class BaseActivity extends AppCompatActivity {
         intent.setClass(this, cls);
         startActivity(intent);
     }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
