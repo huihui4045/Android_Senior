@@ -4,8 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.CornerPathEffect;
+import android.graphics.DiscretePathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathDashPathEffect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -39,8 +41,120 @@ public class MyView extends View {
          */
         // drawStrokeJoin(canvas);
 
-        drawCornerPathEffectDemo(canvas);
+        // drawCornerPathEffectDemo(canvas);
+        /*****
+         * 设置圆形拐角效果
+         */
+       // drawCornerPathEffect(canvas);
 
+        /*****
+         * 打散Path的线段，使得在原来路径的基础上发生打散效果。
+         */
+        //drawDiscretePathEffectDemo(canvas);
+
+        drawPathDashPathEffectDemo(canvas);
+
+    }
+
+    /****
+     * 这个类的作用是使用Path图形来填充当前的路径，
+     * 其构造函数为PathDashPathEffect (Path shape, float advance, float phase,PathDashPathEffect.Stylestyle)。
+     * shape则是指填充图形，advance指每个图形间的间距，phase为绘制时的偏移量，
+     * style为该类自由的枚举值，有三种情况：Style.ROTATE、Style.MORPH和
+      Style.TRANSLATE。
+       其中ROTATE的情况下，线段连接处的图形转换以旋转到与下一段移动方向相一致的角度进行转转，
+        MORPH时图形会以发生拉伸或压缩等变形的情况与下一段相连接，
+        TRANSLATE时，图形会以位置平移的方式与下一段相连接。
+     * @param canvas
+     */
+    private void drawPathDashPathEffectDemo(Canvas canvas){
+        Paint paint = getPaint();
+
+        Path path = getPath();
+        canvas.drawPath(path,paint);
+
+        canvas.translate(0,200);
+
+        paint.setPathEffect(new PathDashPathEffect(getStampPath(),35,0, PathDashPathEffect.Style.MORPH));
+        canvas.drawPath(path,paint);
+
+        canvas.translate(0,200);
+        paint.setPathEffect(new PathDashPathEffect(getStampPath(),35,0, PathDashPathEffect.Style.ROTATE));
+        canvas.drawPath(path,paint);
+
+        canvas.translate(0,200);
+        paint.setPathEffect(new PathDashPathEffect(getStampPath(),35,0, PathDashPathEffect.Style.TRANSLATE));
+        canvas.drawPath(path,paint);
+    }
+
+
+    private Path getStampPath(){
+        Path path  = new Path();
+        path.moveTo(0,20);
+        path.lineTo(10,0);
+        path.lineTo(20,20);
+        path.close();
+
+        path.addCircle(0,0,3, Path.Direction.CCW);
+
+        return path;
+    }
+
+    /***
+     * 打散Path的线段，使得在原来路径的基础上发生打散效果。
+     * @param canvas
+     */
+    private void drawDiscretePathEffectDemo(Canvas canvas){
+        Paint paint = getPaint();
+        Path path = getPath();
+
+        canvas.drawPath(path,paint);
+        /**
+         * 把原有的路线,在指定的间距处插入一个突刺
+         * 第一个这些突出的“杂点”的间距,值越小间距越短,越密集
+         * 第二个是突出距离
+         * segmentLength指定最大的段长，
+         * deviation指定偏离量。
+         */
+        canvas.translate(0,200);
+        paint.setPathEffect(new DiscretePathEffect(2,5));
+        canvas.drawPath(path,paint);
+
+        canvas.translate(0,200);
+        paint.setPathEffect(new DiscretePathEffect(6,5));
+        canvas.drawPath(path,paint);
+
+
+        canvas.translate(0,200);
+        paint.setPathEffect(new DiscretePathEffect(6,15));
+        canvas.drawPath(path,paint);
+    }
+
+    /*****
+     * 圆形拐角效果
+     * CornerPathEffect：
+     这个类的作用就是将Path的各个连接线段之间的夹角用一种更平滑的方式连接，类似于圆弧与切线的效果。
+     一般的，通过CornerPathEffect(float radius)指定一个具体的圆弧半径来实例化一个CornerPathEffect。
+     * @param canvas
+     */
+    private void drawCornerPathEffect(Canvas canvas) {
+        Paint paint = getPaint();
+        Path path = new Path();
+        path.moveTo(100, 600);
+        path.lineTo(400, 100);
+        path.lineTo(700, 900);
+
+        canvas.drawPath(path, paint);
+        paint.setColor(Color.RED);
+        /*****
+         * 半径 内切圆
+         */
+        paint.setPathEffect(new CornerPathEffect(100));
+        canvas.drawPath(path, paint);
+
+        paint.setPathEffect(new CornerPathEffect(200));
+        paint.setColor(Color.GREEN);
+        canvas.drawPath(path, paint);
     }
 
     private Path getPath() {

@@ -49,7 +49,9 @@ package com.huihui.senior.funcation;			Paint 基本使用
 				（1）、CornerPathEffect——圆形拐角效果 
 					paint.setPathEffect(new CornerPathEffect(100));
 					利用半径R=50的圆来代替原来两条直线间的夹角
-				（2）、DashPathEffect——虚线效果 
+				（2）、DashPathEffect——虚线效果
+
+				DiscretePathEffect
 					
 					//画同一条线段,偏移值为15  
 					paint.setPathEffect(new DashPathEffect(new float[]{20,10,50,100},15));
