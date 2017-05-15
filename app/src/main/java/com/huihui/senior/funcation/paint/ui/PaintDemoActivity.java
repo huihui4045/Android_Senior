@@ -2,6 +2,7 @@ package com.huihui.senior.funcation.paint.ui;
 
 import com.huihui.senior.base.DemoActivity;
 import com.huihui.senior.bean.ItemBean;
+import com.huihui.senior.funcation.paint.widget.FilterView;
 import com.huihui.senior.funcation.paint.widget.MyDashView;
 import com.huihui.senior.funcation.paint.widget.MyView;
 
@@ -21,6 +22,7 @@ public class PaintDemoActivity extends DemoActivity {
 
         list.add(new ItemBean("间隔线", new MyDashView(getApplicationContext())));
         list.add(new ItemBean("Paint基本用法", new MyView(getApplicationContext())));
+        list.add(new ItemBean("颜色矩阵", new FilterView(getApplicationContext())));
 
         return list;
     }
