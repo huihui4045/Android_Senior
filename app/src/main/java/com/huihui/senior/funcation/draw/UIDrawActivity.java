@@ -1,17 +1,23 @@
 package com.huihui.senior.funcation.draw;
 
-import android.os.Bundle;
+import com.huihui.senior.base.DemoActivity;
+import com.huihui.senior.bean.ItemBean;
+import com.huihui.senior.funcation.paint.widget.MyDashView;
 
-import com.huihui.senior.base.BaseActivity;
-import com.huihui.senior.R;
+import java.util.ArrayList;
+import java.util.List;
 
-public class UIDrawActivity extends BaseActivity {
+public class UIDrawActivity extends DemoActivity {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_uidraw);
+    public List<ItemBean> getDatas() {
+
+        List<ItemBean> list = new ArrayList<>();
+
+        list.add(new ItemBean("间隔线", new MyDashView(getApplicationContext())));
 
 
+        return list;
     }
 }
