@@ -2,6 +2,7 @@ package com.huihui.senior.funcation.draw;
 
 import com.huihui.senior.base.DemoActivity;
 import com.huihui.senior.bean.ItemBean;
+import com.huihui.senior.funcation.draw.view.WaterfallView;
 import com.huihui.senior.funcation.paint.widget.MyDashView;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class UIDrawActivity extends DemoActivity {
         List<ItemBean> list = new ArrayList<>();
 
         list.add(new ItemBean("间隔线", new MyDashView(getApplicationContext())));
+        list.add(new ItemBean("流式布局", new WaterfallView(getApplicationContext())));
 
 
         return list;

@@ -109,7 +109,43 @@ public class WaterfallLayout extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
 
+        int childCount = getChildCount();
+        clearTop();
+        for (int i = 0; i < childCount; i++) {
+            View child = this.getChildAt(i);
+            /*int childHeight = child.getMeasuredHeight() * mChildWidth / child.getMeasuredWidth();
+            //Log.e(TAG,"onLayout MeasureHeight = " + child.getMeasuredHeight() + "; MeasureWidth = " + child.getMeasuredWidth());
+            int minColum = getMinHeightColum();
+            int tleft = minColum * (mChildWidth + mHorizontalSpace);
+            int ttop = mTop[minColum];
+            int tright = tleft + mChildWidth;
+            int tbottom = ttop + childHeight;
+            mTop[minColum] += mVerticalSpace + childHeight;
+            child.layout(tleft, ttop, tright, tbottom);*/
+
+            WaterfallLayoutParams lParams = (WaterfallLayoutParams)child.getLayoutParams();
+            child.layout(lParams.left, lParams.top, lParams.right, lParams.bottom);
+        }
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(View v, int index);
+    }
+
+    public void setOnItemClickListener(final OnItemClickListener listener) {
+        for (int i = 0; i < getChildCount(); i++) {
+            final int index = i;
+            View view = getChildAt(i);
+            view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(v, index);
+                }
+            });
+        }
+    }
+
+
 
     public WaterfallLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -138,4 +174,26 @@ public class WaterfallLayout extends ViewGroup {
         }
 
     }
+
+    @Override
+    public ViewGroup.LayoutParams generateLayoutParams(AttributeSet attrs) {
+        return new WaterfallLayoutParams(getContext(), attrs);
+    }
+
+    @Override
+    protected ViewGroup.LayoutParams generateDefaultLayoutParams() {
+        return new WaterfallLayoutParams(WaterfallLayoutParams.WRAP_CONTENT, WaterfallLayoutParams.WRAP_CONTENT);
+    }
+
+    @Override
+    protected ViewGroup.LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
+        return new WaterfallLayoutParams(p);
+    }
+
+    @Override
+    protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
+        return p instanceof WaterfallLayoutParams;
+    }
+
+
 }
