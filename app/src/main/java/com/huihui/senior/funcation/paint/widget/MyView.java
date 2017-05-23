@@ -52,8 +52,26 @@ public class MyView extends View {
          */
         //drawDiscretePathEffectDemo(canvas);
 
-        drawPathDashPathEffectDemo(canvas);
+       // drawPathDashPathEffectDemo(canvas);
 
+
+        drawSubpixelText(canvas);
+    }
+
+
+    private void drawSubpixelText(Canvas canvas){
+
+        Paint paint = new Paint();
+        paint.setColor(Color.GREEN);
+        String text = "动脑学院高级UI";
+        paint.setTextSize(100);
+
+        paint.setSubpixelText(false);
+        canvas.drawText(text,0,200,paint);
+
+        canvas.translate(0,300);
+        paint.setSubpixelText(true);
+        canvas.drawText(text,0,200,paint);
     }
 
     /****
