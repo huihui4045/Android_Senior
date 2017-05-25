@@ -1,11 +1,16 @@
 package com.huihui.senior.funcation.draw;
 
-import android.os.Bundle;
+import com.huihui.senior.base.DemoActivity;
+import com.huihui.senior.bean.ItemBean;
+import com.huihui.senior.funcation.draw.view.WaterfallView;
+import com.huihui.senior.funcation.draw.widget.BrushView;
+import com.huihui.senior.funcation.draw.widget.QuadBrushView;
+import com.huihui.senior.funcation.paint.widget.MyDashView;
 
-import com.huihui.senior.base.BaseActivity;
-import com.huihui.senior.R;
+import java.util.ArrayList;
+import java.util.List;
 
-public class UIDrawActivity extends BaseActivity {
+public class UIDrawActivity extends DemoActivity {
 
     @Override
     public List<ItemBean> getDatas() {
