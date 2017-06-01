@@ -5,9 +5,10 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.huihui.senior.R;
@@ -65,7 +66,8 @@ public class CircleProgressBar extends View {
         typedArray.recycle();
     }
 
-    private int center;
+    private int center_x;
+    private int center_y;
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -78,36 +80,66 @@ public class CircleProgressBar extends View {
 
         int paddingBottom = getPaddingBottom();
         int paddingTop = getPaddingTop();
+        /*****
+         * 绘制圆环
+         */
 
+        int width = getWidth() - paddingLeft - paddingRight;
 
-
-        int width=getWidth()-paddingLeft-paddingRight;
-
-        int height=getHeight()-paddingBottom-paddingTop;
+        int height = getHeight() - paddingBottom - paddingTop;
 
         paint.setColor(roundColor);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(roundWidth); // 圆环的宽度
         paint.setAntiAlias(true);
 
-        float radius=Math.min(width,height)/2-roundWidth/2;
+        float radius = Math.min(width, height) / 2 - roundWidth / 2;
+
+        center_y = paddingTop + height / 2;
+        center_x = paddingLeft + width / 2;
+        canvas.drawCircle(center_x, center_y, radius, paint);
+
+        // 画进度百分比
+        paint.setColor(textColor);
+        paint.setStrokeWidth(0);
+        paint.setTextSize(textSize);
+        paint.setTypeface(Typeface.DEFAULT_BOLD);
+
+        int percent = progress * 100 / max;
+
+        String strPercent = percent + "%";
+        Paint.FontMetricsInt fm = paint.getFontMetricsInt();
 
 
-        Log.e("CircleProgressBar","paddingLeft:"+paddingLeft);
-        Log.e("CircleProgressBar","width:"+width);
-        Log.e("CircleProgressBar","radius:"+radius);
+        canvas.drawText(strPercent, center_x - paint.measureText(strPercent) / 2, center_y + (fm.bottom - fm.top) / 2 - fm.bottom, paint);
 
 
-        canvas.drawCircle(paddingLeft+width/2,paddingTop+height/2,radius,paint);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        paint.setStrokeWidth(roundWidth);
 
+        RectF rectF = new RectF(center_x - radius, center_y - radius, center_x + radius, center_y + radius);
+
+        canvas.drawArc(rectF, 0, 360 * percent / max, false, paint);
 
     }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    public void setProgress(int progress) {
+        if (progress < 0) {
+            throw new IllegalArgumentException("进度Progress不能小于0");
+        }
+        if (progress > max) {
 
+            this.progress = max;
+        }
 
+        if (progress <= max) {
+
+            this.progress = progress;
+
+            postInvalidate();
+
+        }
     }
 
     @Override
