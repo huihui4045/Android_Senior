@@ -3,6 +3,9 @@ package com.huihui.senior.funcation.paint.model;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
+import android.graphics.Region;
+
 
 /**
  * Created by gavin
@@ -18,6 +21,20 @@ public class MapItem {
 
     private int strokeColor;
 
+    private int id;
+
+    private String name;
+
+
+
+
+    /*****
+     * 构造一个区域对象，左闭右开的。
+     */
+    RectF f = new RectF();
+
+    Region region = new Region();
+
 
     /****
      * 地图的人数
@@ -27,6 +44,21 @@ public class MapItem {
     public MapItem() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setPath(Path path) {
         this.path = path;
@@ -58,19 +90,24 @@ public class MapItem {
 
         canvas.save();
 
-
-        paint.setStrokeWidth(1);
-        paint.setColor(fillColor);
-        paint.setStyle(Paint.Style.FILL);
-
+        /****
+         * 被点击
+         */
         if (isFocused) {
 
+            paint.setStrokeWidth(5);
+            paint.setColor(fillColor);
+            paint.setStyle(Paint.Style.FILL_AND_STROKE);
+            paint.setShadowLayer(10, 0, 0, 0xFFFFFFFF);
 
         } else {
 
-
+            paint.setStrokeWidth(1);
+            paint.setColor(fillColor);
+            paint.setStyle(Paint.Style.FILL);
         }
 
+        canvas.restore();
 
         canvas.drawPath(path, paint);
 
@@ -78,11 +115,20 @@ public class MapItem {
     }
 
     /****
-     * 是否点击
+     * 是否点击  判断一个点 是否在指定的区域内
      * @return
      */
     public boolean isClick(int x, int y) {
 
-        return false;
+
+        /****()
+         * 计算控制点的边界
+         */
+        path.computeBounds(f, false);
+
+        region.setPath(path, new Region((int) f.left, (int) f.top, (int) f.right, (int) f.bottom));
+
+
+        return region.contains(x, y);
     }
 }

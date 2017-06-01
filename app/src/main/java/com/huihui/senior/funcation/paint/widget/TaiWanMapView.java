@@ -6,11 +6,14 @@ import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.annotation.RawRes;
+import android.support.v4.view.GestureDetectorCompat;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.huihui.senior.R;
 import com.huihui.senior.funcation.paint.model.MapItem;
 import com.huihui.senior.funcation.paint.util.AnalyzeSAX;
 
@@ -28,47 +31,92 @@ public class TaiWanMapView extends View implements Handler.Callback {
 
     private List<MapItem> mapItems;
 
+    private String TAG = this.getClass().getSimpleName();
+
     private Paint mPaint;
+
+    private GestureDetectorCompat mCompat;
+
+    private int mX;
+
+    private int mY;
+
+    private float mScale = 1.3f;
 
     public TaiWanMapView(Context context) {
         super(context);
-        initView();
+        initView(context);
     }
 
     public TaiWanMapView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        initView();
+        initView(context);
     }
 
     public TaiWanMapView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initView();
+        initView(context);
     }
 
     private Handler handler = new Handler(this);
 
-    private void initView() {
+    private void initView(Context context) {
 
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
+        //setLayerType(LAYER_TYPE_SOFTWARE, mPaint);
 
+        mCompat = new GestureDetectorCompat(context, new GestureDetector.SimpleOnGestureListener() {
+
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                mX = (int) (e.getX() / mScale);
+
+                mY = (int) (e.getY() / mScale);
+
+                Log.e(TAG, " onSingleTapUp 点击了");
+
+                postInvalidate();
+
+                return super.onDown(e);
+            }
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+
+
+                return super.onSingleTapConfirmed(e);
+            }
+        });
+
+
+    }
+
+    private OnItemMapClickListener listener;
+
+    public void bindData(@RawRes final int rawTd, OnItemMapClickListener listener) {
+
+        this.listener = listener;
 
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                InputStream inputStream = getResources().openRawResource(R.raw.taiwan);
+                InputStream inputStream = getResources().openRawResource(rawTd);
 
-                /****
-                 * AnalyzeSAX解析
-                 */
-                mapItems = AnalyzeSAX.readXML(inputStream);
+                if (inputStream != null) {
 
-                handler.sendEmptyMessage(200);
+                    /****
+                     * AnalyzeSAX解析
+                     */
+                    mapItems = AnalyzeSAX.readXML(inputStream);
+                    handler.sendEmptyMessage(200);
+                }
+
+
             }
         }).start();
-
-
     }
 
 
@@ -76,14 +124,21 @@ public class TaiWanMapView extends View implements Handler.Callback {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.scale(1.3f,1.3f);
+        canvas.scale(mScale, mScale);
 
         if (mapItems != null && mapItems.size() > 0) {
 
             for (MapItem mapItem : mapItems) {
 
 
-                mapItem.drawMap(canvas, mPaint,true);
+                boolean click = mapItem.isClick(mX, mY);
+
+                if (click) {
+
+                    listener.onItemMapClick(mapItem);
+                }
+
+                mapItem.drawMap(canvas, mPaint, click);
             }
         }
 
@@ -96,7 +151,12 @@ public class TaiWanMapView extends View implements Handler.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
+
+
+        Log.e(TAG, "onTouchEvent");
+
+        return this.mCompat.onTouchEvent(event);
+
     }
 
     @Override
@@ -108,5 +168,11 @@ public class TaiWanMapView extends View implements Handler.Callback {
         }
 
         return true;
+    }
+
+
+    public interface OnItemMapClickListener {
+
+        void onItemMapClick(MapItem item);
     }
 }

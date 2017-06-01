@@ -69,6 +69,17 @@ public class XMLContentHandler extends DefaultHandler {
 
             currentMapItem.setPath(PathParser.createPathFromPathData(attributes.getValue("pathData")));
 
+            String id = attributes.getValue("id");
+            if (id!=null){
+
+                currentMapItem.setId(Integer.parseInt(id));
+            }
+            String name = attributes.getValue("name");
+            if (name!=null){
+
+                currentMapItem.setName(name);
+            }
+
             currentMapItem.setNum(getNum());
 
             int argb = Color.argb(currentMapItem.getNum(), currentMapItem.getNum(), 0, currentMapItem.getNum());
