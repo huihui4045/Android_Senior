@@ -2,7 +2,6 @@ package com.huihui.senior.funcation.paint.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.ColorMatrix;
 import android.view.View;
 
 /**
@@ -26,10 +25,10 @@ public class FilterView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        ColorMatrix colorMatrix=new ColorMatrix(new float[]{
+       /* ColorMatrix colorMatrix=new ColorMatrix(new float[]{
 
 
 
-        });
+        });*/
     }
 }
