@@ -23,7 +23,14 @@
         <activity android:name=".TestActivity" />
         <activity android:name=".funcation.paint.ui.PaintDemoActivity" />
         <activity android:name=".base.ShowActivity" />
-        <activity android:name=".base.DemoActivity"></activity>
+        <activity android:name=".base.DemoActivity" />
+        <activity android:name=".funcation.path.PathDemoActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
