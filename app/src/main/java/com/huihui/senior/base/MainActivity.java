@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import com.huihui.senior.R;
 import com.huihui.senior.bean.ItemBean;
+import com.huihui.senior.funcation.animator.AnimatorActivity;
 import com.huihui.senior.funcation.draw.UIDrawActivity;
 import com.huihui.senior.funcation.paint.ui.PaintDemoActivity;
 import com.huihui.senior.funcation.path.PathDemoActivity;
@@ -42,6 +43,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         data.add(new ItemBean("UI绘制流程", UIDrawActivity.class));
         data.add(new ItemBean("Paint使用demo", PaintDemoActivity.class));
         data.add(new ItemBean("Path使用demo", PathDemoActivity.class));
+        data.add(new ItemBean("属性动画使用demo", AnimatorActivity.class));
 
         return data;
     }
