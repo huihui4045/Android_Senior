@@ -8,6 +8,7 @@ import android.widget.ListView;
 import com.huihui.senior.R;
 import com.huihui.senior.bean.ItemBean;
 import com.huihui.senior.funcation.draw.UIDrawActivity;
+import com.huihui.senior.funcation.material.MaterialActivity;
 import com.huihui.senior.funcation.paint.ui.PaintDemoActivity;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
 
         data.add(new ItemBean("UI绘制流程", UIDrawActivity.class));
         data.add(new ItemBean("Paint使用demo", PaintDemoActivity.class));
+        data.add(new ItemBean("Material使用demo", MaterialActivity.class));
 
         return data;
     }

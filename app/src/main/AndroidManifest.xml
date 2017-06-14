@@ -23,7 +23,8 @@
         <activity android:name=".TestActivity" />
         <activity android:name=".funcation.paint.ui.PaintDemoActivity" />
         <activity android:name=".base.ShowActivity" />
-        <activity android:name=".base.DemoActivity"></activity>
+        <activity android:name=".base.DemoActivity" />
+        <activity android:name=".funcation.material.MaterialActivity"></activity>
     </application>
 
 </manifest>
