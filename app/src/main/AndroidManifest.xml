@@ -32,6 +32,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".funcation.animator.AnimatorActivity"></activity>
+        <activity android:name=".base.DemoActivity" />
+        <activity android:name=".funcation.material.MaterialActivity"></activity>
     </application>
 
 </manifest>
