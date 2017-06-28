@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="显示"
             android:background="#f00"
-            android:onClick="startFirstAnim"/>
+            />
     </LinearLayout>
     <ImageView
         android:orientation="vertical"
@@ -26,7 +26,6 @@
         android:src="@drawable/icon1"
         android:scaleType="fitXY"
         android:layout_alignParentBottom="true"
-        android:onClick="startSecondAnim"
         android:visibility="invisible"
         android:clickable="true"
         />
