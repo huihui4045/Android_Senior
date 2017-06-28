@@ -7,8 +7,11 @@ import android.widget.ListView;
 
 import com.huihui.senior.R;
 import com.huihui.senior.bean.ItemBean;
+import com.huihui.senior.funcation.animator.AnimatorActivity;
 import com.huihui.senior.funcation.draw.UIDrawActivity;
+import com.huihui.senior.funcation.material.MaterialActivity;
 import com.huihui.senior.funcation.paint.ui.PaintDemoActivity;
+import com.huihui.senior.funcation.path.PathDemoActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,11 +1,14 @@
 package com.huihui.senior.funcation.animator.view;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -162,6 +165,16 @@ public class AnimatorLayout extends FrameLayout implements View.OnClickListener 
         });
 
         animator.start();*/
+
+
+       //插值器
+
+        ObjectAnimator animator=ObjectAnimator.ofFloat(mImageDuo,"translationY",0f,1000f);
+
+        animator.setInterpolator(new AccelerateInterpolator(50));
+        animator.setInterpolator(new BounceInterpolator());
+
+        animator.start();
 
 
     }
