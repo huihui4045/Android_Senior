@@ -6,6 +6,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.huihui.senior.R;
+import com.huihui.senior.TestActivity;
 import com.huihui.senior.bean.ItemBean;
 import com.huihui.senior.funcation.animator.AnimatorActivity;
 import com.huihui.senior.funcation.draw.UIDrawActivity;
@@ -46,6 +47,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         data.add(new ItemBean("Material使用demo", MaterialActivity.class));
         data.add(new ItemBean("Path使用demo", PathDemoActivity.class));
         data.add(new ItemBean("属性动画使用demo", AnimatorActivity.class));
+        data.add(new ItemBean("demo测试", TestActivity.class));
 
         return data;
     }
